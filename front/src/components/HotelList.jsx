@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import api from '../api/axios'
 import HotelCard from './HotelCard'
 import CreateHotelButton from './CreateHotelButton'
+import Paginator from './Paginator'
 
 function HotelList() {
     const [hotels, setHotels] = useState([])
@@ -9,19 +10,28 @@ function HotelList() {
     const [error, setError] = useState(null)
     const [page, setPage] = useState(1)
     const [lastPage, setLastPage] = useState(1)
+    const [paginationLinks, setPaginationLinks] = useState([])
 
     useEffect(() => {
-        api.get(`/hotels?page=${page}`)
-            .then(response => {
+        const fetchHotels = async () => {
+            setLoading(true)
+            setError(null)
+
+            try {
+                const response = await api.get(`/hotels?page=${page}`)
                 const data = response.data.data
+
                 setHotels(data.data)
                 setLastPage(data.last_page)
-                setLoading(false)
-            })
-            .catch(() => {
+                setPaginationLinks(data.links)
+            } catch (error) {
                 setError('Error al cargar los hoteles')
+            } finally {
                 setLoading(false)
-            })
+            }
+        }
+
+        fetchHotels()
     }, [page])
 
     if (loading) return <p>Cargando hoteles...</p>
@@ -50,8 +60,7 @@ function HotelList() {
             {hotels.map(hotel => (<HotelCard key={hotel.nit} hotel={hotel} />))}
 
             <div>
-                {page > 1 && <button onClick={() => setPage(page - 1)}>Anterior</button>}
-                {page < lastPage && <button onClick={() => setPage(page + 1)}>Siguiente</button>}
+                <Paginator meta={{ current_page: page, last_page: lastPage, links: paginationLinks }} onPageChange={setPage} />
             </div>
 
             <div>
