@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import api from '../api/axios'
 import HotelCard from './HotelCard'
+import CreateHotelButton from './CreateHotelButton'
 
 function HotelList() {
     const [hotels, setHotels] = useState([])
@@ -31,7 +32,7 @@ function HotelList() {
             <div>
                 <h1>No hay hoteles disponibles.</h1>
                 <div>
-                    <button>Crear Hotel</button>
+                    <CreateHotelButton />
                 </div>
             </div>
 
@@ -43,7 +44,7 @@ function HotelList() {
             <h1>Listado de hoteles</h1>
 
             <div>
-                <button>Crear Hotel</button>
+                <CreateHotelButton />
             </div>
 
             {hotels.map(hotel => (<HotelCard key={hotel.nit} hotel={hotel} />))}
@@ -54,7 +55,7 @@ function HotelList() {
             </div>
 
             <div>
-                <button>Crear Hotel</button>
+                <CreateHotelButton />
             </div>
         </div>
     )
