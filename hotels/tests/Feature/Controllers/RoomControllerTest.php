@@ -118,3 +118,49 @@ it('returns 400 if room combination already exists', function () {
             ],
         ]);
 });
+
+it('lists rooms of a hotel by nit', function () {
+    $hotel = Hotel::factory()->create(['nit' => '12345678-9']);
+
+    Room::create([
+        'hotel_id' => $hotel->id,
+        'type' => 'estandar',
+        'accommodation' => 'sencilla',
+        'quantity' => 3,
+    ]);
+
+    Room::create([
+        'hotel_id' => $hotel->id,
+        'type' => 'junior',
+        'accommodation' => 'triple',
+        'quantity' => 2,
+    ]);
+
+    $response = $this->getJson("/api/v1/hotel/{$hotel->nit}/rooms");
+
+    $response->assertOk()
+        ->assertJson([
+            'status' => 'success',
+        ])
+        ->assertJsonCount(2, 'data')
+        ->assertJsonFragment([
+            'type' => 'estandar',
+            'accommodation' => 'sencilla',
+            'quantity' => 3,
+        ])
+        ->assertJsonFragment([
+            'type' => 'junior',
+            'accommodation' => 'triple',
+            'quantity' => 2,
+        ]);
+});
+
+it('returns 404 when trying to list rooms for a non-existent hotel', function () {
+    $response = $this->getJson('/api/v1/hotel/00000000-0/rooms');
+
+    $response->assertNotFound()
+        ->assertJson([
+            'status' => 'error',
+            'message' => 'Hotel no encontrado.',
+        ]);
+});
