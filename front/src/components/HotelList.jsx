@@ -29,21 +29,32 @@ function HotelList() {
     if (hotels.length === 0) {
         return (
             <div>
-                <p>No hay hoteles disponibles.</p>
-                <button>Crear Hotel</button>
+                <h1>No hay hoteles disponibles.</h1>
+                <div>
+                    <button>Crear Hotel</button>
+                </div>
             </div>
+
         )
     }
 
     return (
         <div>
-            {hotels.map(hotel => (
-                <HotelCard key={hotel.nit} hotel={hotel} />
-            ))}
+            <h1>Listado de hoteles</h1>
+
+            <div>
+                <button>Crear Hotel</button>
+            </div>
+
+            {hotels.map(hotel => (<HotelCard key={hotel.nit} hotel={hotel} />))}
 
             <div>
                 {page > 1 && <button onClick={() => setPage(page - 1)}>Anterior</button>}
                 {page < lastPage && <button onClick={() => setPage(page + 1)}>Siguiente</button>}
+            </div>
+
+            <div>
+                <button>Crear Hotel</button>
             </div>
         </div>
     )

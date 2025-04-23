@@ -1,19 +1,57 @@
+import { useState } from 'react'
+
 function RoomForm({ onClose }) {
+    const [form, setForm] = useState({
+        type: '',
+        accommodation: '',
+        quantity: '',
+    })
+
+    const [error, setError] = useState(null)
+
+    const handleChange = e => {
+        const { name, value } = e.target
+        setForm(prev => ({ ...prev, [name]: value }))
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        if (!form.type || !form.accommodation || !form.quantity) {
+            setError('Todos los campos son obligatorios.')
+            return
+        }
+
+        if (isNaN(form.quantity) || parseInt(form.quantity) <= 0) {
+            setError('La cantidad debe ser un número positivo.')
+            return
+        }
+
+        setError(null)
+
+        console.log('Formulario enviado:', form)
+
+        onClose()
+    }
+
     return (
         <div>
             <h4>Asignar nueva habitación</h4>
-            <form>
+
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label>Tipo de habitación:</label>
-                    <input type="text" name="type" />
+                    <input type="text" name="type" value={form.type} onChange={handleChange} />
                 </div>
                 <div>
                     <label>Acomodación:</label>
-                    <input type="text" name="accommodation" />
+                    <input type="text" name="accommodation" value={form.accommodation} onChange={handleChange} />
                 </div>
                 <div>
                     <label>Cantidad:</label>
-                    <input type="number" name="quantity" />
+                    <input type="number" name="quantity" value={form.quantity} onChange={handleChange} />
                 </div>
                 <button type="submit">Guardar</button>
                 <button type="button" onClick={onClose}>Cancelar</button>
