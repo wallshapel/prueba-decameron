@@ -62,10 +62,6 @@ function HotelList() {
             <div>
                 <Paginator meta={{ current_page: page, last_page: lastPage, links: paginationLinks }} onPageChange={setPage} />
             </div>
-
-            <div>
-                <CreateHotelButton />
-            </div>
         </div>
     )
 }
