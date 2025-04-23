@@ -43,7 +43,7 @@ class StoreHotelRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'status' => 'error',
-            'errors' => $validator->errors()
+            'errors' => $validator->errors(),
         ], 400));
     }
 }

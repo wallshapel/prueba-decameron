@@ -11,8 +11,8 @@ class RoomInputValidator
     {
         $validCombinations = [
             'estandar' => ['sencilla', 'doble'],
-            'junior'   => ['triple', 'cuádruple'],
-            'suite'    => ['sencilla', 'doble', 'triple'],
+            'junior' => ['triple', 'cuádruple'],
+            'suite' => ['sencilla', 'doble', 'triple'],
         ];
 
         foreach ($rooms as $roomData) {
@@ -20,11 +20,11 @@ class RoomInputValidator
             $accommodation = strtolower($roomData['accommodation']);
 
             // Validar combinación tipo-acomodación
-            if (!in_array($accommodation, $validCombinations[$type])) {
+            if (! in_array($accommodation, $validCombinations[$type])) {
                 throw ValidationException::withMessages([
                     'rooms' => [
-                        "La acomodación '{$accommodation}' no es válida para el tipo de habitación '{$type}'."
-                    ]
+                        "La acomodación '{$accommodation}' no es válida para el tipo de habitación '{$type}'.",
+                    ],
                 ]);
             }
             $exists = Room::where('hotel_id', $hotelId)
@@ -35,8 +35,8 @@ class RoomInputValidator
             if ($exists) {
                 throw ValidationException::withMessages([
                     'rooms' => [
-                        "Ya existe una habitación de tipo {$type} con acomodación {$roomData['accommodation']} para este hotel."
-                    ]
+                        "Ya existe una habitación de tipo {$type} con acomodación {$roomData['accommodation']} para este hotel.",
+                    ],
                 ]);
             }
         }

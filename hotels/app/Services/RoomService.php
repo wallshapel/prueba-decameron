@@ -13,7 +13,7 @@ class RoomService implements RoomServiceInterface
 {
     public function assignToHotel(int $hotelId, array $rooms): array
     {
-        $request = new AssignRoomsRequest();
+        $request = new AssignRoomsRequest;
         $validator = Validator::make(['rooms' => $rooms], $request->rules(), $request->messages());
 
         if ($validator->fails()) {

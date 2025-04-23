@@ -17,7 +17,7 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Hotel ' . $this->faker->city(),
+            'name' => 'Hotel '.$this->faker->city(),
             'address' => $this->faker->streetAddress(),
             'city' => $this->faker->city(),
             'nit' => $this->faker->unique()->numerify('########-#'),

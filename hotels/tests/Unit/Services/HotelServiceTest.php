@@ -8,7 +8,7 @@ use Tests\TestCase;
 uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function () {
-    $this->service = new HotelService();
+    $this->service = new HotelService;
 });
 
 it('creates a hotel successfully', function () {

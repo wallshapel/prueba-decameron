@@ -25,7 +25,7 @@ class HotelController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => $hotels
+            'data' => $hotels,
         ]);
     }
 
@@ -37,22 +37,22 @@ class HotelController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'data' => $hotel
+                'data' => $hotel,
             ]);
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'errors' => $e->errors()
+                'errors' => $e->errors(),
             ], 400);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ], 404);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Error inesperado: ' . $e->getMessage()
+                'message' => 'Error inesperado: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -64,17 +64,17 @@ class HotelController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'data' => $hotel
+                'data' => $hotel,
             ], 201);
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'errors' => $e->errors()
+                'errors' => $e->errors(),
             ], 400);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Error inesperado: ' . $e->getMessage()
+                'message' => 'Error inesperado: '.$e->getMessage(),
             ], 500);
         }
     }

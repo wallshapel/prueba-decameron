@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(HotelServiceInterface::class, HotelService::class);
         $this->app->bind(RoomServiceInterface::class, RoomService::class);
     }
+
     /**
      * Bootstrap any application services.
      */

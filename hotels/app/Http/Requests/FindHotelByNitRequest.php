@@ -19,7 +19,7 @@ class FindHotelByNitRequest extends FormRequest
             'nit' => [
                 'required',
                 'string',
-                'regex:/^\d{8}-\d{1}$/'
+                'regex:/^\d{8}-\d{1}$/',
             ],
         ];
     }
@@ -37,7 +37,7 @@ class FindHotelByNitRequest extends FormRequest
     {
         $response = response()->json([
             'status' => 'error',
-            'errors' => $validator->errors()
+            'errors' => $validator->errors(),
         ], 400);
 
         throw new HttpResponseException($response);

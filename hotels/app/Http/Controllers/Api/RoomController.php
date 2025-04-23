@@ -29,22 +29,22 @@ class RoomController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Habitaciones asignadas correctamente.'
+                'message' => 'Habitaciones asignadas correctamente.',
             ], 201);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Hotel no encontrado.'
+                'message' => 'Hotel no encontrado.',
             ], 404);
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'errors' => $e->errors()
+                'errors' => $e->errors(),
             ], 400);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Error inesperado: ' . $e->getMessage()
+                'message' => 'Error inesperado: '.$e->getMessage(),
             ], 500);
         }
     }

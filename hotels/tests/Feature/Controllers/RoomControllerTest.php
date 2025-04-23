@@ -16,14 +16,14 @@ it('assigns rooms to existing hotel', function () {
             [
                 'type' => 'suite',
                 'accommodation' => 'doble',
-                'quantity' => 2
+                'quantity' => 2,
             ],
             [
                 'type' => 'junior',
                 'accommodation' => 'cuádruple',
-                'quantity' => 1
-            ]
-        ]
+                'quantity' => 1,
+            ],
+        ],
     ];
 
     $response = $this->postJson("/api/v1/hotel/{$hotel->nit}/room", $payload);
@@ -31,7 +31,7 @@ it('assigns rooms to existing hotel', function () {
     $response->assertCreated()
         ->assertJson([
             'status' => 'success',
-            'message' => 'Habitaciones asignadas correctamente.'
+            'message' => 'Habitaciones asignadas correctamente.',
         ]);
 
     expect($hotel->rooms()->count())->toBe(2);
@@ -42,9 +42,9 @@ it('returns 404 if hotel not found by nit', function () {
             [
                 'type' => 'suite',
                 'accommodation' => 'doble',
-                'quantity' => 2
-            ]
-        ]
+                'quantity' => 2,
+            ],
+        ],
     ];
 
     $response = $this->postJson('/api/v1/hotel/00000000-0/room', $payload);
@@ -52,7 +52,7 @@ it('returns 404 if hotel not found by nit', function () {
     $response->assertNotFound()
         ->assertJson([
             'status' => 'error',
-            'message' => 'Hotel no encontrado.'
+            'message' => 'Hotel no encontrado.',
         ]);
 });
 
@@ -66,9 +66,9 @@ it('returns 400 if type and accommodation are incompatible', function () {
             [
                 'type' => 'junior',
                 'accommodation' => 'doble', // invalid for junior
-                'quantity' => 2
-            ]
-        ]
+                'quantity' => 2,
+            ],
+        ],
     ];
 
     $response = $this->postJson("/api/v1/hotel/{$hotel->nit}/room", $payload);
@@ -78,9 +78,9 @@ it('returns 400 if type and accommodation are incompatible', function () {
             'status' => 'error',
             'errors' => [
                 'rooms' => [
-                    "La acomodación 'doble' no es válida para el tipo de habitación 'junior'."
-                ]
-            ]
+                    "La acomodación 'doble' no es válida para el tipo de habitación 'junior'.",
+                ],
+            ],
         ]);
 });
 
@@ -93,7 +93,7 @@ it('returns 400 if room combination already exists', function () {
         'hotel_id' => $hotel->id,
         'type' => 'suite',
         'accommodation' => 'doble',
-        'quantity' => 2
+        'quantity' => 2,
     ]);
 
     $payload = [
@@ -101,9 +101,9 @@ it('returns 400 if room combination already exists', function () {
             [
                 'type' => 'suite',
                 'accommodation' => 'doble', // duplicated
-                'quantity' => 1
-            ]
-        ]
+                'quantity' => 1,
+            ],
+        ],
     ];
 
     $response = $this->postJson("/api/v1/hotel/{$hotel->nit}/room", $payload);
@@ -113,8 +113,8 @@ it('returns 400 if room combination already exists', function () {
             'status' => 'error',
             'errors' => [
                 'rooms' => [
-                    "Ya existe una habitación de tipo suite con acomodación doble para este hotel."
-                ]
-            ]
+                    'Ya existe una habitación de tipo suite con acomodación doble para este hotel.',
+                ],
+            ],
         ]);
 });

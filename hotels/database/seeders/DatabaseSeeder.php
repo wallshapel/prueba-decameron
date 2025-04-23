@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
                 // Avoid repeated combinations for the hotel
                 do {
                     $room = Room::factory()->make();
-                    $key = $room->type . '-' . $room->accommodation;
+                    $key = $room->type.'-'.$room->accommodation;
                 } while (in_array($key, $combinations));
 
                 $combinations[] = $key;

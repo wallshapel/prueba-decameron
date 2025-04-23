@@ -14,7 +14,7 @@ class HotelService implements HotelServiceInterface
 {
     public function create(array $data)
     {
-        $request = new StoreHotelRequest();
+        $request = new StoreHotelRequest;
         $validator = Validator::make($data, $request->rules(), $request->messages());
 
         if ($validator->fails()) {
@@ -31,7 +31,7 @@ class HotelService implements HotelServiceInterface
 
     public function findByNit(?string $nit)
     {
-        $request = new FindHotelByNitRequest();
+        $request = new FindHotelByNitRequest;
         $validator = Validator::make(['nit' => $nit], $request->rules(), $request->messages());
 
         if ($validator->fails()) {
@@ -40,8 +40,8 @@ class HotelService implements HotelServiceInterface
 
         $hotel = Hotel::where('nit', $nit)->first();
 
-        if (!$hotel) {
-            throw new ModelNotFoundException("Hotel no encontrado.");
+        if (! $hotel) {
+            throw new ModelNotFoundException('Hotel no encontrado.');
         }
 
         return $hotel;

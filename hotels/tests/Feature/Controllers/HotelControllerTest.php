@@ -16,13 +16,13 @@ it('returns paginated hotels', function () {
             'data' => [
                 'current_page',
                 'data' => [
-                    '*' => ['name', 'address', 'city', 'nit', 'room_limit']
+                    '*' => ['name', 'address', 'city', 'nit', 'room_limit'],
                 ],
                 'first_page_url',
                 'last_page_url',
                 'per_page',
-                'total'
-            ]
+                'total',
+            ],
         ]);
 });
 
@@ -46,7 +46,7 @@ it('creates a hotel with valid data', function () {
                 'city' => $data['city'],
                 'nit' => $data['nit'],
                 'room_limit' => $data['room_limit'],
-            ]
+            ],
         ]);
 
     expect(Hotel::where('nit', $data['nit'])->exists())->toBeTrue();
@@ -71,8 +71,8 @@ it('returns validation errors when creating invalid hotel', function () {
             'errors' => [
                 'name',
                 'nit',
-                'room_limit'
-            ]
+                'room_limit',
+            ],
         ]);
 });
 
@@ -97,8 +97,8 @@ it('returns error when NIT already exists', function () {
         ])
         ->assertJsonStructure([
             'errors' => [
-                'nit'
-            ]
+                'nit',
+            ],
         ]);
 });
 
@@ -107,7 +107,7 @@ it('returns a hotel when NIT is valid', function () {
         'nit' => '55667788-1',
     ]);
 
-    $response = $this->getJson('/api/v1/hotel?nit=' . $hotel->nit);
+    $response = $this->getJson('/api/v1/hotel?nit='.$hotel->nit);
 
     $response->assertOk()
         ->assertJson([
@@ -118,7 +118,7 @@ it('returns a hotel when NIT is valid', function () {
                 'city' => $hotel->city,
                 'nit' => $hotel->nit,
                 'room_limit' => $hotel->room_limit,
-            ]
+            ],
         ]);
 });
 
@@ -131,8 +131,8 @@ it('returns error when NIT is missing', function () {
         ])
         ->assertJsonStructure([
             'errors' => [
-                'nit'
-            ]
+                'nit',
+            ],
         ]);
 });
 
@@ -142,6 +142,6 @@ it('returns error when NIT does not exist', function () {
     $response->assertStatus(404)
         ->assertJson([
             'status' => 'error',
-            'message' => 'Hotel no encontrado.'
+            'message' => 'Hotel no encontrado.',
         ]);
 });
