@@ -21,12 +21,6 @@ class HotelService implements HotelServiceInterface
             throw new ValidationException($validator);
         }
 
-        if (!is_int($data['room_limit'])) {
-            throw ValidationException::withMessages([
-                'room_limit' => ['Debe ser un número entero sin comillas.']
-            ]);
-        }
-
         return Hotel::create($data);
     }
 
