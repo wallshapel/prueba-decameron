@@ -3,8 +3,9 @@
 use App\Models\Hotel;
 use App\Services\HotelService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class, RefreshDatabase::class);
+uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function () {
     $this->service = new HotelService();
