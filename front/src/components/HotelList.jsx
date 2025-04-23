@@ -12,25 +12,25 @@ function HotelList() {
     const [lastPage, setLastPage] = useState(1)
     const [paginationLinks, setPaginationLinks] = useState([])
 
-    useEffect(() => {
-        const fetchHotels = async () => {
-            setLoading(true)
-            setError(null)
+    const fetchHotels = async () => {
+        setLoading(true)
+        setError(null)
 
-            try {
-                const response = await api.get(`/hotels?page=${page}`)
-                const data = response.data.data
+        try {
+            const response = await api.get(`/hotels?page=${page}`)
+            const data = response.data.data
 
-                setHotels(data.data)
-                setLastPage(data.last_page)
-                setPaginationLinks(data.links)
-            } catch (error) {
-                setError('Error al cargar los hoteles')
-            } finally {
-                setLoading(false)
-            }
+            setHotels(data.data)
+            setLastPage(data.last_page)
+            setPaginationLinks(data.links)
+        } catch (error) {
+            setError('Error al cargar los hoteles')
+        } finally {
+            setLoading(false)
         }
+    }
 
+    useEffect(() => {
         fetchHotels()
     }, [page])
 
@@ -42,7 +42,7 @@ function HotelList() {
             <div>
                 <h1>No hay hoteles disponibles.</h1>
                 <div>
-                    <CreateHotelButton />
+                    <CreateHotelButton onCreated={fetchHotels} />
                 </div>
             </div>
 
@@ -54,7 +54,7 @@ function HotelList() {
             <h1>Listado de hoteles</h1>
 
             <div>
-                <CreateHotelButton />
+                <CreateHotelButton onCreated={fetchHotels} />
             </div>
 
             {hotels.map(hotel => (<HotelCard key={hotel.nit} hotel={hotel} />))}
