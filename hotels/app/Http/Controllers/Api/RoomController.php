@@ -48,4 +48,28 @@ class RoomController extends Controller
             ], 500);
         }
     }
+
+    public function getByHotelNit(string $nit): JsonResponse
+    {
+        try {
+            $hotel = Hotel::where('nit', $nit)->firstOrFail();
+
+            $rooms = $hotel->rooms;
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $rooms,
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Hotel no encontrado.',
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error inesperado: '.$e->getMessage(),
+            ], 500);
+        }
+    }
 }

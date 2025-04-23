@@ -9,3 +9,4 @@ Route::get('/hotels', [HotelController::class, 'index']);
 Route::post('/hotel', [HotelController::class, 'store']);
 
 Route::post('/hotel/{nit}/room', [RoomController::class, 'store']);
+Route::get('/hotel/{nit}/rooms', [RoomController::class, 'getByHotelNit']);
