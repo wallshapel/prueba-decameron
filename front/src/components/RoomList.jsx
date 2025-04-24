@@ -9,14 +9,8 @@ function RoomList({ nit }) {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const response = await api.get(`/hotel?nit=${nit}`)
-                const hotel = response.data.data
-
-                if (hotel && hotel.rooms) {
-                    setRooms(hotel.rooms)
-                } else {
-                    setRooms([])
-                }
+                const response = await api.get(`/hotel/${nit}/rooms`)
+                setRooms(response.data.data)
             } catch (err) {
                 setError('Error al cargar habitaciones')
             } finally {
