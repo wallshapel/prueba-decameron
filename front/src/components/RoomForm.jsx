@@ -64,11 +64,22 @@ function RoomForm({ nit, onClose, onAssigned }) {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Tipo de habitación:</label>
-                    <input type="text" name="type" value={form.type} onChange={handleChange} />
+                    <select name="type" value={form.type} onChange={handleChange}>
+                        <option value="">Seleccionar tipo</option>
+                        <option value="Estándar">Estándar</option>
+                        <option value="Junior">Junior</option>
+                        <option value="Suite">Suite</option>
+                    </select>
                 </div>
                 <div>
                     <label>Acomodación:</label>
-                    <input type="text" name="accommodation" value={form.accommodation} onChange={handleChange} />
+                    <select name="accommodation" value={form.accommodation} onChange={handleChange}>
+                        <option value="">Seleccionar acomodación</option>
+                        <option value="Sencilla">Sencilla</option>
+                        <option value="Doble">Doble</option>
+                        <option value="Triple">Triple</option>
+                        <option value="Cuádruple">Cuádruple</option>
+                    </select>
                 </div>
                 <div>
                     <label>Cantidad:</label>
