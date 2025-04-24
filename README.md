@@ -6,9 +6,9 @@ Este proyecto está dividido en dos partes principales:
 
   
 
--  `backend/`: API RESTful construida con **Laravel 10**
+-  `backend/`: API RESTful construida con **Laravel 12**
 
--  `frontend/`: Interfaz de usuario construida con **React 18**
+-  `frontend/`: Interfaz de usuario construida con **React 19**
 
   
 ---
