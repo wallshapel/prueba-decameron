@@ -163,7 +163,9 @@ Frontend estará disponible en `http://localhost:5173` o el puerto indicado por 
 
 -   Backend: http://127.0.0.1:8000/api
     
--   Frontend: http://localhost:5173
+-   Frontend: http://localhost:5173 (local)
+
+-   Frontend: http://localhost:3000 (docker)
     
 
 ----------
