@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: hotels
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 456
+    ports:
+      - "5432:5432"
+    restart: "no"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    image: php:8.2-cli
+    working_dir: /var/www/html
+    volumes:
+      - ./hotels:/var/www/html
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: hotels
+      DB_USERNAME: postgres
+      DB_PASSWORD: 456
+    command: >
+      sh -c "
+        apt update &&
+        apt install -y unzip zip libpq-dev git curl netcat-openbsd &&
+        docker-php-ext-install pdo pdo_pgsql &&
+        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer &&
+        echo 'Esperando a que PostgreSQL acepte conexiones...' &&
+        until nc -z db 5432; do sleep 1; done &&
+        composer install &&
+        php artisan config:clear &&
+        php artisan migrate --seed &&
+        php artisan serve --host=0.0.0.0 --port=8000
+      "
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    restart: "no"
+
+  frontend:
+    image: node:18.20.6
+    working_dir: /app
+    volumes:
+      - ./front:/app
+    command: >
+      sh -c "
+        npm install &&
+        npm run build &&
+        npx serve -s dist -l 3000
+      "
+    ports:
+      - "3000:3000"
+    restart: "no"
+
+volumes:
+  postgres_data:
