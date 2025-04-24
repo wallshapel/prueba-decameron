@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import api from '../api/axios'
 
-function RoomForm({ onClose }) {
+function RoomForm({ nit, onClose, onAssigned }) {
     const [form, setForm] = useState({
         type: '',
         accommodation: '',
@@ -9,12 +10,12 @@ function RoomForm({ onClose }) {
 
     const [error, setError] = useState(null)
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         const { name, value } = e.target
-        setForm(prev => ({ ...prev, [name]: value }))
+        setForm((prev) => ({ ...prev, [name]: value }))
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         if (!form.type || !form.accommodation || !form.quantity) {
@@ -29,9 +30,29 @@ function RoomForm({ onClose }) {
 
         setError(null)
 
-        console.log('Formulario enviado:', form)
+        try {
+            await api.post(`/hotel/${nit}/room`, {
+                rooms: [
+                    {
+                        type: form.type,
+                        accommodation: form.accommodation,
+                        quantity: parseInt(form.quantity),
+                    },
+                ],
+            })
 
-        onClose()
+            if (onAssigned) onAssigned()
+            onClose()
+        } catch (err) {
+            if (err.response?.data?.errors) {
+                const firstError = Object.values(err.response.data.errors)[0][0]
+                setError(firstError)
+            } else if (err.response?.data?.message) {
+                setError(err.response.data.message)
+            } else {
+                setError('Ocurrió un error al guardar la habitación.')
+            }
+        }
     }
 
     return (

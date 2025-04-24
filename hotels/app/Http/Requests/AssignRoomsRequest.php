@@ -17,7 +17,7 @@ class AssignRoomsRequest extends FormRequest
     {
         return [
             'rooms' => 'required|array|min:1',
-            'rooms.*.type' => 'required|string|in:estandar,junior,suite',
+            'rooms.*.type' => 'required|string|in:Estándar,Junior,Suite',
             'rooms.*.accommodation' => 'required|string|max:100',
             'rooms.*.quantity' => 'required|integer|min:1',
         ];
@@ -29,7 +29,7 @@ class AssignRoomsRequest extends FormRequest
             'rooms.required' => 'Debe proporcionar al menos una habitación.',
             'rooms.array' => 'Las habitaciones deben estar en formato de arreglo.',
             'rooms.*.type.required' => 'El tipo de habitación es obligatorio.',
-            'rooms.*.type.in' => 'El tipo debe ser estandar, junior o suite.',
+            'rooms.*.type.in' => 'El tipo debe ser Estándar, Junior o Suite.',
             'rooms.*.accommodation.required' => 'La acomodación es obligatoria.',
             'rooms.*.quantity.required' => 'La cantidad de habitaciones es obligatoria.',
             'rooms.*.quantity.integer' => 'La cantidad debe ser un número entero.',

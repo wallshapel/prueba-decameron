@@ -14,13 +14,13 @@ it('assigns rooms to existing hotel', function () {
     $payload = [
         'rooms' => [
             [
-                'type' => 'suite',
-                'accommodation' => 'doble',
+                'type' => 'Suite',
+                'accommodation' => 'Doble',
                 'quantity' => 2,
             ],
             [
-                'type' => 'junior',
-                'accommodation' => 'cuádruple',
+                'type' => 'Junior',
+                'accommodation' => 'Cuádruple',
                 'quantity' => 1,
             ],
         ],
@@ -40,8 +40,8 @@ it('returns 404 if hotel not found by nit', function () {
     $payload = [
         'rooms' => [
             [
-                'type' => 'suite',
-                'accommodation' => 'doble',
+                'type' => 'Suite',
+                'accommodation' => 'Doble',
                 'quantity' => 2,
             ],
         ],
@@ -64,8 +64,8 @@ it('returns 400 if type and accommodation are incompatible', function () {
     $payload = [
         'rooms' => [
             [
-                'type' => 'junior',
-                'accommodation' => 'doble', // invalid for junior
+                'type' => 'Junior',
+                'accommodation' => 'Doble', // invalid for Junior
                 'quantity' => 2,
             ],
         ],
@@ -78,7 +78,7 @@ it('returns 400 if type and accommodation are incompatible', function () {
             'status' => 'error',
             'errors' => [
                 'rooms' => [
-                    "La acomodación 'doble' no es válida para el tipo de habitación 'junior'.",
+                    "La acomodación 'Doble' no es válida para el tipo de habitación 'Junior'.",
                 ],
             ],
         ]);
@@ -91,16 +91,16 @@ it('returns 400 if room combination already exists', function () {
 
     Room::create([
         'hotel_id' => $hotel->id,
-        'type' => 'suite',
-        'accommodation' => 'doble',
+        'type' => 'Suite',
+        'accommodation' => 'Doble',
         'quantity' => 2,
     ]);
 
     $payload = [
         'rooms' => [
             [
-                'type' => 'suite',
-                'accommodation' => 'doble', // duplicated
+                'type' => 'Suite',
+                'accommodation' => 'Doble', // duplicated
                 'quantity' => 1,
             ],
         ],
@@ -113,7 +113,7 @@ it('returns 400 if room combination already exists', function () {
             'status' => 'error',
             'errors' => [
                 'rooms' => [
-                    'Ya existe una habitación de tipo suite con acomodación doble para este hotel.',
+                    'Ya existe una habitación de tipo Suite con acomodación Doble para este hotel.',
                 ],
             ],
         ]);
@@ -124,15 +124,15 @@ it('lists rooms of a hotel by nit', function () {
 
     Room::create([
         'hotel_id' => $hotel->id,
-        'type' => 'estandar',
-        'accommodation' => 'sencilla',
+        'type' => 'Estándar',
+        'accommodation' => 'Sencilla',
         'quantity' => 3,
     ]);
 
     Room::create([
         'hotel_id' => $hotel->id,
-        'type' => 'junior',
-        'accommodation' => 'triple',
+        'type' => 'Junior',
+        'accommodation' => 'Triple',
         'quantity' => 2,
     ]);
 
@@ -144,13 +144,13 @@ it('lists rooms of a hotel by nit', function () {
         ])
         ->assertJsonCount(2, 'data')
         ->assertJsonFragment([
-            'type' => 'estandar',
-            'accommodation' => 'sencilla',
+            'type' => 'Estándar',
+            'accommodation' => 'Sencilla',
             'quantity' => 3,
         ])
         ->assertJsonFragment([
-            'type' => 'junior',
-            'accommodation' => 'triple',
+            'type' => 'Junior',
+            'accommodation' => 'Triple',
             'quantity' => 2,
         ]);
 });

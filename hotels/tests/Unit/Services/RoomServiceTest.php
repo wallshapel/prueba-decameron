@@ -14,13 +14,13 @@ it('assigns valid rooms to hotel', function () {
 
     $rooms = [
         [
-            'type' => 'suite',
-            'accommodation' => 'doble',
+            'type' => 'Suite',
+            'accommodation' => 'Doble',
             'quantity' => 3,
         ],
         [
-            'type' => 'junior',
-            'accommodation' => 'cuádruple',
+            'type' => 'Junior',
+            'accommodation' => 'Cuádruple',
             'quantity' => 1,
         ],
     ];
@@ -37,8 +37,8 @@ it('throws when type and accommodation are incompatible', function () {
 
     $rooms = [
         [
-            'type' => 'junior',
-            'accommodation' => 'doble', // not allowed for "junior" type
+            'type' => 'Junior',
+            'accommodation' => 'Doble', // not allowed for "Junior" type
             'quantity' => 2,
         ],
     ];
@@ -46,7 +46,7 @@ it('throws when type and accommodation are incompatible', function () {
     $service = new RoomService;
 
     $service->assignToHotel($hotel->id, $rooms);
-})->throws(ValidationException::class, 'La acomodación \'doble\' no es válida para el tipo de habitación \'junior\'');
+})->throws(ValidationException::class, 'La acomodación \'Doble\' no es válida para el tipo de habitación \'Junior\'');
 
 it('throws when room combination already exists for hotel', function () {
     $hotel = Hotel::factory()->create();
@@ -54,15 +54,15 @@ it('throws when room combination already exists for hotel', function () {
     // Primera habitación válida
     Room::create([
         'hotel_id' => $hotel->id,
-        'type' => 'suite',
-        'accommodation' => 'doble',
+        'type' => 'Suite',
+        'accommodation' => 'Doble',
         'quantity' => 3,
     ]);
 
     $rooms = [
         [
-            'type' => 'suite',
-            'accommodation' => 'doble', // already exists
+            'type' => 'Suite',
+            'accommodation' => 'Doble', // already exists
             'quantity' => 1,
         ],
     ];
@@ -70,7 +70,7 @@ it('throws when room combination already exists for hotel', function () {
     $service = new RoomService;
 
     $service->assignToHotel($hotel->id, $rooms);
-})->throws(ValidationException::class, 'Ya existe una habitación de tipo suite con acomodación doble para este hotel.');
+})->throws(ValidationException::class, 'Ya existe una habitación de tipo Suite con acomodación Doble para este hotel.');
 
 it('throws when rooms array is missing or empty', function () {
     $hotel = Hotel::factory()->create();

@@ -10,16 +10,15 @@ class RoomInputValidator
     public static function validateBusinessRules(int $hotelId, array $rooms): void
     {
         $validCombinations = [
-            'estandar' => ['sencilla', 'doble'],
-            'junior' => ['triple', 'cuádruple'],
-            'suite' => ['sencilla', 'doble', 'triple'],
+            'Estándar' => ['Sencilla', 'Doble'],
+            'Junior' => ['Triple', 'Cuádruple'],
+            'Suite' => ['Sencilla', 'Doble', 'Triple'],
         ];
 
         foreach ($rooms as $roomData) {
             $type = $roomData['type'];
-            $accommodation = strtolower($roomData['accommodation']);
+            $accommodation = $roomData['accommodation'];
 
-            // Validar combinación tipo-acomodación
             if (! in_array($accommodation, $validCombinations[$type])) {
                 throw ValidationException::withMessages([
                     'rooms' => [
