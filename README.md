@@ -20,9 +20,9 @@ Este proyecto está dividido en dos partes principales:
 Antes de comenzar, asegúrate de tener instalado en tu máquina:
 
   
-- [PHP 8.2 o superior](https://www.php.net/)
+- [PHP 8.4.6 o superior](https://www.php.net/)
 
-- [Composer](https://getcomposer.org/)
+- [Composer 2.8.8 o superior](https://getcomposer.org/)
 
 - [PostgreSQL 14 o superior](https://www.postgresql.org/)
 
