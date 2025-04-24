@@ -26,7 +26,7 @@ Antes de comenzar, asegúrate de tener instalado en tu máquina:
 
 - [PostgreSQL 14 o superior](https://www.postgresql.org/)
 
-- [Node.js 18 o superior](https://nodejs.org/)
+- [Node.js 18.20.6 o superior](https://nodejs.org/)
 
 - [NPM](https://www.npmjs.com/)
   
