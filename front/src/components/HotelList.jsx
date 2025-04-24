@@ -34,32 +34,33 @@ function HotelList() {
         fetchHotels()
     }, [page])
 
-    if (loading) return <p>Cargando hoteles...</p>
-    if (error) return <p>{error}</p>
+    if (loading) return <p className="text-center text-blue-800 font-semibold">Cargando hoteles...</p>
+    if (error) return <p className="text-center text-red-600">{error}</p>
 
     if (hotels.length === 0) {
         return (
-            <div>
-                <h1>No hay hoteles disponibles.</h1>
-                <div>
-                    <CreateHotelButton onCreated={fetchHotels} />
-                </div>
+            <div className="max-w-4xl mx-auto mt-10 text-center space-y-4">
+                <h1 className="text-2xl font-bold text-blue-800">No hay hoteles disponibles.</h1>
+                <CreateHotelButton onCreated={fetchHotels} />
             </div>
-
         )
     }
 
     return (
-        <div>
-            <h1>Listado de hoteles</h1>
+        <div className="max-w-5xl mx-auto px-4 py-8">
+            <h1 className="text-3xl font-bold text-center text-blue-800 mb-8">Listado de hoteles</h1>
 
-            <div>
+            <div className="flex justify-center mb-6">
                 <CreateHotelButton onCreated={fetchHotels} />
             </div>
 
-            {hotels.map(hotel => (<HotelCard key={hotel.nit} hotel={hotel} />))}
+            <div className="space-y-6">
+                {hotels.map(hotel => (
+                    <HotelCard key={hotel.nit} hotel={hotel} />
+                ))}
+            </div>
 
-            <div>
+            <div className="mt-8 flex justify-center">
                 <Paginator meta={{ current_page: page, last_page: lastPage, links: paginationLinks }} onPageChange={setPage} />
             </div>
         </div>

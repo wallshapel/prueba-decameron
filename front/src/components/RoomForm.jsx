@@ -56,15 +56,20 @@ function RoomForm({ nit, onClose, onAssigned }) {
     }
 
     return (
-        <div>
-            <h4>Asignar nueva habitación</h4>
+        <div className="mt-4 p-4 border rounded-lg bg-blue-50 shadow-sm">
+            <h4 className="text-lg font-semibold text-blue-900 mb-2">Asignar nueva habitación</h4>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="space-y-3">
                 <div>
-                    <label>Tipo de habitación:</label>
-                    <select name="type" value={form.type} onChange={handleChange}>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de habitación:</label>
+                    <select
+                        name="type"
+                        value={form.type}
+                        onChange={handleChange}
+                        className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    >
                         <option value="">Seleccionar tipo</option>
                         <option value="Estándar">Estándar</option>
                         <option value="Junior">Junior</option>
@@ -72,8 +77,13 @@ function RoomForm({ nit, onClose, onAssigned }) {
                     </select>
                 </div>
                 <div>
-                    <label>Acomodación:</label>
-                    <select name="accommodation" value={form.accommodation} onChange={handleChange}>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Acomodación:</label>
+                    <select
+                        name="accommodation"
+                        value={form.accommodation}
+                        onChange={handleChange}
+                        className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    >
                         <option value="">Seleccionar acomodación</option>
                         <option value="Sencilla">Sencilla</option>
                         <option value="Doble">Doble</option>
@@ -82,11 +92,30 @@ function RoomForm({ nit, onClose, onAssigned }) {
                     </select>
                 </div>
                 <div>
-                    <label>Cantidad:</label>
-                    <input type="number" name="quantity" value={form.quantity} onChange={handleChange} />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Cantidad:</label>
+                    <input
+                        type="number"
+                        name="quantity"
+                        value={form.quantity}
+                        onChange={handleChange}
+                        className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    />
                 </div>
-                <button type="submit">Guardar</button>
-                <button type="button" onClick={onClose}>Cancelar</button>
+                <div className="flex gap-3">
+                    <button
+                        type="submit"
+                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+                    >
+                        Guardar
+                    </button>
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition"
+                    >
+                        Cancelar
+                    </button>
+                </div>
             </form>
         </div>
     )

@@ -21,17 +21,19 @@ function RoomList({ nit }) {
         fetchRooms()
     }, [nit])
 
-    if (loading) return <p>Cargando habitaciones...</p>
-    if (error) return <p>{error}</p>
-    if (rooms.length === 0) return <p>No hay habitaciones asignadas.</p>
+    if (loading) return <p className="text-sm text-gray-500 italic mt-2">Cargando habitaciones...</p>
+    if (error) return <p className="text-red-600 text-sm mt-2">{error}</p>
+    if (rooms.length === 0) return <p className="text-gray-600 text-sm mt-2">No hay habitaciones asignadas.</p>
 
     return (
-        <div>
-            <h4>Habitaciones asignadas:</h4>
-            <ul>
+        <div className="mt-4 bg-white border rounded-md p-4 shadow-sm">
+            <h4 className="text-blue-700 font-semibold mb-2">Habitaciones asignadas:</h4>
+            <ul className="space-y-2 list-disc list-inside">
                 {rooms.map((room, index) => (
-                    <li key={index}>
-                        Tipo: <strong>{room.type}</strong> – Acomodación: <strong>{room.accommodation}</strong> – Cantidad: {room.quantity}
+                    <li key={index} className="text-sm text-gray-700">
+                        <span className="font-medium text-gray-900">Tipo:</span> {room.type} &nbsp;|&nbsp;
+                        <span className="font-medium text-gray-900">Acomodación:</span> {room.accommodation} &nbsp;|&nbsp;
+                        <span className="font-medium text-gray-900">Cantidad:</span> {room.quantity}
                     </li>
                 ))}
             </ul>
