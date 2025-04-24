@@ -79,3 +79,29 @@ it('throws when rooms array is missing or empty', function () {
 
     $service->assignToHotel($hotel->id, []);
 })->throws(ValidationException::class, 'Debe proporcionar al menos una habitación.');
+
+it('throws when room_limit is exceeded', function () {
+    $hotel = Hotel::factory()->create([
+        'room_limit' => 5,
+    ]);
+
+    // There are already 3 rooms in the DB
+    Room::create([
+        'hotel_id' => $hotel->id,
+        'type' => 'Estándar',
+        'accommodation' => 'Doble',
+        'quantity' => 3,
+    ]);
+
+    // We tried to add 3 more (total would be 6 > 5)
+    $rooms = [
+        [
+            'type' => 'Junior',
+            'accommodation' => 'Triple',
+            'quantity' => 3,
+        ],
+    ];
+
+    $service = new RoomService;
+    $service->assignToHotel($hotel->id, $rooms);
+})->throws(ValidationException::class, 'Se superó el límite de habitaciones permitido para este hotel (5).');
