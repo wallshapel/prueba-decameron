@@ -1,121 +1,190 @@
-# Sistema de Gestión Hotelera (Laravel + React)
 
-  
+# Sistema de Gestión Hotelera (Laravel + React)
 
 Este proyecto está dividido en dos partes principales:
 
-  
+-   `hotels/`: API RESTful construida con **Laravel 12**
+    
+-   `front/`: Interfaz de usuario construida con **React 19**
+    
 
--  `backend/`: API RESTful construida con **Laravel 12**
-
--  `frontend/`: Interfaz de usuario construida con **React 19**
-
-  
----
-  
+----------
 
 ## ✅ Requisitos previos
 
-  
-Antes de comenzar, asegúrate de tener instalado en tu máquina:
+Asegúrate de tener instalados en tu sistema:
 
-  
-- [PHP 8.4.6 o superior](https://www.php.net/)
-
-- [Composer 2.8.8 o superior](https://getcomposer.org/)
-
-- [PostgreSQL 14 o superior](https://www.postgresql.org/)
-
-- [Node.js 18.20.6 o superior](https://nodejs.org/)
-
-- [NPM](https://www.npmjs.com/)
-  
-
----
-
-  
-## 📦 Clonar el repositorio
-  
-
-```
-git  clone  https://github.com/wallshapel/prueba-decameron
-cd  prueba-decameron
-```
+-   [PHP 8.4.6 o superior](https://www.php.net/)
+    
+-   [Composer 2.8.8 o superior](https://getcomposer.org/)
+    
+-   [PostgreSQL 14 o superior](https://www.postgresql.org/)
+    
+-   [Node.js 18.20.6 o superior](https://nodejs.org/)
+    
+-   [NPM](https://www.npmjs.com/)
     
 
-📂  **Configuración  del  backend (Laravel)**
+----------
 
-Ve  al  directorio  del  backend:
+## 📦 Clonar el repositorio
 
- ```
- cd  hotels
- ```
+```
+git clone https://github.com/wallshapel/prueba-decameron
+cd prueba-decameron
+```
 
-**Instala  las  dependencias  de  PHP:** 
+----------
 
-    composer  install
+## 📂 Configuración del Backend (Laravel)
 
-Copia  el  archivo  .env.example  a  .env y  Asegúrate  de  tener  una  base  de  datos  PostgreSQL  llamada  hotels  creada  manualmente.  Luego  configura  tu  archivo  .env  con  los  datos  q  están  en  el  .env.example. Si  ya  posees  un  usuario  y  una  contraseña  propias en tu motor de PostgreSQL,  entonces  configúralos  en  el  .env
+**1.  Entra al directorio `hotels`:**
+    
 
-**Ejecuta las migraciones**: para q se puedan crear las tablas, relaciones etc.. en la base de datos:
+```
+cd hotels
+```
 
-    php  artisan  migrate
+**2.  Instala las dependencias de PHP:**
+    
 
-**Ejecuta  los  seeders**: (opcional si  deseas  poblar  datos  de  ejemplo): 
+```
+composer install
+```
 
-    php  artisan  db:seed
+**3.  Copia el archivo `.env.example` a `.env`:**
+    
 
-**Inicia  el  servidor  de  desarrollo:**
+```
+cp .env.example .env
+```
 
-      php  artisan  serve
+**4.  Asegúrate de tener creada la base de datos PostgreSQL llamada `hotels`.**
+    
+**5.  Configura el archivo `.env` con las credenciales de acceso a tu base de datos PostgreSQL. Puedes usar los datos de `.env.example` como referencia.**
+    
+**6.  Ejecuta las migraciones para crear las tablas y relaciones:**
+    
 
-El  backend  estará  disponible  por  defecto  en:  http://127.0.0.1:8000/api/v1/<los endpoints>
+```
+php artisan migrate
+```
 
+**7.  Ejecuta los seeders si deseas poblar la base de datos con datos de prueba:**
+    
 
-**Ver  documentación  de  la  api  con  scramble:**
+```
+php artisan db:seed
+```
 
-    php  artisan  vendor:publish  --provider="Dedoc\Scramble\ScrambleServiceProvider"  --tag="scramble-config"
+**8.  Inicia el servidor de desarrollo:**
+    
 
-acceder  en  el  navegador  a:  http://localhost:8000/docs/api/#/
+```
+php artisan serve
+```
 
-  ### TESTS 
+Por defecto, la API estará disponible en:
 
-Ejecutar  Test.  se  hicieron  tests  unitarios  y  de  integración/funcionalidad:
+```
+http://127.0.0.1:8000/api/v1/
+```
 
-    ./vendor/bin/pest
+### 🖋️ Documentación de la API
 
-  ---
-  
+Para acceder a la documentación de la API generada por **Scramble**:
 
-### 💻  Configuración  del  frontend (React)
+```
+php artisan vendor:publish --provider="Dedoc\Scramble\ScrambleServiceProvider" --tag="scramble-config"
+```
 
-Desde la raíz del proyecto clonado inicialmente, ve  al  directorio  del  frontend:
-cd  front
+Luego abre en el navegador:
 
-**Instala  las  dependencias  de  Node:**
+```
+http://localhost:8000/docs/api/#/
+```
 
-    npm  install
- 
+### 📚 Pruebas (Tests)
 
-Asegúrate  de  que  el  backend  ya  está  funcionando  en  http://127.0.0.1:8000
+Para ejecutar los tests unitarios y funcionales:
 
-  
+```
+./vendor/bin/pest
+```
 
-## Inicia  el  servidor  de  desarrollo:
+----------
 
-    npm  run  dev
+## 💻 Configuración del Frontend (React)
 
-El  frontend  estará  disponible  en:  http://localhost:5173  o  en  el  puerto  que  la  consola  indique
+**1.  Desde la raíz del repositorio, entra al directorio del frontend:**
+    
 
-  
-🧪  Verificación  rápida
+```
+cd front
+```
 
-Visita  http://127.0.0.1:8000/api  para  probar  el  backend.
-Visita  http://localhost:5173  para  probar  la  interfaz.
+**2.  Instala las dependencias de Node:**
+    
 
-📌  Notas  importantes
+```
+npm install
+```
 
-Levanta  siempre  primero  el  backend  antes  del  frontend.
-Si  algo  falla,  asegúrate  de  que  los  .env  estén  correctamente  configurados.
-Verifica  que  las  versiones  de  PHP,  Node  y  PostgreSQL  sean  las  requeridas.
-La  base  de  datos  hotels  debe  estar  creada  antes  de  ejecutar  las  migraciones.
+**3.  Asegúrate de que el backend esté funcionando en `http://127.0.0.1:8000`**
+    
+**4.  Inicia el servidor de desarrollo:**
+    
+
+```
+npm run dev
+```
+
+La aplicación estará disponible en:
+
+```
+http://localhost:5173
+```
+
+o en el puerto que indique la consola.
+
+----------
+
+## 🤎 Verificación rápida
+
+-   Backend: [http://127.0.0.1:8000/api](http://127.0.0.1:8000/api)
+    
+-   Frontend: [http://localhost:5173](http://localhost:5173)
+    
+
+----------
+
+## 📌 Notas importantes
+
+-   Levanta **siempre primero el backend**, luego el frontend.
+    
+-   Verifica que los archivos `.env` estén correctamente configurados.
+    
+-   Revisa que tienes las versiones requeridas de PHP, Node y PostgreSQL.
+    
+-   La base de datos `hotels` debe existir antes de ejecutar las migraciones.
+    
+-   Usa `php artisan migrate:fresh --seed` para reiniciar y poblar la base de datos.
+    
+
+----------
+
+## 📄 Estructura del proyecto
+
+```
+prueba-decameron/
+├── hotels/        # Backend (Laravel 12)
+│   └── .env
+├── front/         # Frontend (React 19)
+    └── .env
+```
+
+----------
+
+## 📧 Soporte
+
+Si encuentras errores o deseas proponer mejoras, abre un issue en el repositorio.
