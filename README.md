@@ -48,7 +48,7 @@ cd  prueba-decameron
 Ve  al  directorio  del  backend:
 
  ```
- cd  backend
+ cd  hotels
  ```
 
 **Instala  las  dependencias  de  PHP:** 
