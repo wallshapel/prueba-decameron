@@ -43,6 +43,13 @@ Antes de comenzar, asegúrate de tener instalado en tu máquina:
 
 ----------
 
+### APP EN LA NUBE
+
+http://162.243.161.219:3000/
+
+
+----------
+
   
 
 ## 📦 Clonar el repositorio
