@@ -68,12 +68,6 @@ cd prueba-decameron
 
 ----------
 
-  
-
-## 🐳 Opción 1: Levantar con Docker (recomendado para evitar configuraciones manuales)
-
-  
-
 ### ⚠️ Importante sobre `.env`
 
   
@@ -104,6 +98,11 @@ DB_HOST=db
 
 -  **Si usas Laravel localmente**, **haz lo contrario**.
 
+----------
+
+  
+
+## 🐳 Opción 1: Levantar con Docker (recomendado para evitar configuraciones manuales)
   
 
 ### 🚀 Ejecutar contenedores
