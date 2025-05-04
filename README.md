@@ -45,7 +45,7 @@ Antes de comenzar, asegúrate de tener instalado en tu máquina:
 
 ### APP EN LA NUBE
 
-http://162.243.161.219:3000/
+https://react-production-79b6.up.railway.app/
 
 
 ----------
