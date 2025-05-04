@@ -184,13 +184,13 @@ composer install
 ```
 
 
+
+**Ejecutar migraciones:**
+
+  
 - Crea una base de datos PostgreSQL llamada `hotels`.
 
 - Ajusta en `.env` el usuario y contraseña de PostgreSQL si es necesario.
-
-  
-
-**Ejecutar migraciones:**
 
   
 
