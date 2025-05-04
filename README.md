@@ -170,18 +170,19 @@ composer install
 ```
 
   
+**Corregir posible error de Termwind:**
 
-**Copiar archivo**  `**.env**`  **y configurar:**
 
-  
+- Es posible que después de instalar todas las dependencias se produzca un error relacionado con termwind. Si ese es el caso dirigirse al archivo `/vendor/nunomaduro/termwind/src/HtmlRenderer.php` y reemplazar su contenido por el archivo `patch.php`. Luego ejecutar los comandos
 
-```
-
-cp .env.example .env
 
 ```
 
-  
+composer dump-autoload
+composer install
+
+```
+
 
 - Crea una base de datos PostgreSQL llamada `hotels`.
 
